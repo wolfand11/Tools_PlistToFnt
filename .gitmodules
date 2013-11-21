@@ -1,0 +1,3 @@
+[submodule "PlistToFnt/libs/qtplist"]
+	path = PlistToFnt/libs/qtplist
+	url = https://github.com/reillywatson/qtplist.git
