@@ -19,6 +19,9 @@ public slots:
     void convertFile();
 private:
     Ui::Dialog *ui;
+
+    QString m_fileFullPath;
+    QString m_message;
 };
 
 #endif // DIALOG_H
