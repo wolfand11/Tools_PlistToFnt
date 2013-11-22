@@ -31,7 +31,7 @@ public:
     QString toString(int pageId) const
     {
         QString temp;
-        temp = QString("id=%1   x=%2     y=%3     width=%4     height=%5     xoffset=%6     yoffset=%7    xadvance=%8     page=%9\n")
+        temp = QString("char id=%1   x=%2     y=%3     width=%4     height=%5     xoffset=%6     yoffset=%7    xadvance=%8     page=%9\n")
                 .arg(QString::number(m_charID),
                      QString::number(m_posX),
                      QString::number(m_posY),
@@ -69,6 +69,7 @@ public:
         temp = QString("page id=%1 file=\"%2\"\n")
                 .arg(QString::number(m_pageId),
                      m_imagePath);
+        temp += QString("chars count=%1\n").arg(QString::number(m_chars.count()));
         foreach (const FntCharData& charData, m_chars)
         {
             temp += charData.toString(m_pageId);
@@ -85,7 +86,7 @@ class FntData
 {
 public:
     FntData()
-        :m_padding(Qt::black)
+        :m_padding(0,0,0,0)
         ,m_lineHeight(0.0f)
     {
     }
@@ -98,8 +99,9 @@ public:
                      QString::number(m_padding.blue()),
                      QString::number(m_padding.alpha())
                      );
-        temp += QString("common lineHeight=%1\n")
-                .arg(QString::number(m_lineHeight));
+        temp += QString("common lineHeight=%1 pages=%2\n")
+                .arg(QString::number(m_lineHeight),
+                     QString::number(m_pages.count()));
         foreach (const FntPageData& pageData, m_pages) {
             temp += pageData.toString();
         }
