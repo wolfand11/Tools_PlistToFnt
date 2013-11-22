@@ -100,7 +100,9 @@ public:
                      QString::number(m_padding.blue()),
                      QString::number(m_padding.alpha())
                      );
-        temp += QString("common lineHeight=%1 pages=%2\n")
+        //fix CocosBuilder Support
+        //common lineHeight=70 base=26 scaleW=0 scaleH=0 pages=1 packed=0
+        temp += QString("common lineHeight=%1 base=0 scaleW=0 scaleH=0 pages=%2  packed=0\n")
                 .arg(QString::number(m_lineHeight),
                      QString::number(m_pages.count()));
         foreach (const FntPageData& pageData, m_pages) {
