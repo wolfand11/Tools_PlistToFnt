@@ -27,6 +27,7 @@ public:
         m_height = frameRect.height();
         m_xoffset = offset.width();
         m_yoffset = offset.height();
+        m_xadvance = frameRect.width();
     }
     QString toString(int pageId) const
     {
