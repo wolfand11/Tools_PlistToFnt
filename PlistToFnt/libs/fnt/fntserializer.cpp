@@ -27,7 +27,7 @@ FntData FntSerializer::ConvertPlistVarToFntData(QVariant &plistVar)
     tempFntPage.m_pageId = 0;
     QVariantMap framesVar = rootVar.value(kPlistKey_frames).toMap();
     FntCharData tempCharData;
-    int charUnicodeValue = 0;
+    unsigned short charUnicodeValue = 0;
     QRectF frame;
     QSizeF offset;
     QSizeF sourceSize;
