@@ -118,8 +118,9 @@ public:
     static FntData ConvertPlistVarToFntData(QVariant& plistVar);
 
 private:
-    static QRectF ConvertStringToRectF(QString& str);
-    static QSizeF ConvertStringToSizeF(QString& str);
+    static QRectF ConvertStringToRectF(const QString& str);
+    static QSizeF ConvertStringToSizeF(const QString& str);
+    static unsigned short ConvertKeyToCharID(const QString& key);
 };
 
 #endif // FNTSERIALIZER_H

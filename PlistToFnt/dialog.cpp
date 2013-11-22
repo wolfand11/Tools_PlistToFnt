@@ -57,4 +57,5 @@ void Dialog::convertFile()
     QFile writeFile(fntFileFullPath);
     writeFile.open(QFile::WriteOnly | QIODevice::Text);
     writeFile.write(fntStr.toStdString().c_str());
+    ShowMessage("Convert Completed!\n Please Select Plist file.");
 }

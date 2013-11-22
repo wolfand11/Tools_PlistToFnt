@@ -33,6 +33,7 @@ FntData FntSerializer::ConvertPlistVarToFntData(QVariant &plistVar)
     QSizeF sourceSize;
     foreach (const QString& key, framesVar.keys()) {
         QVariantMap itemVar = framesVar.value(key).toMap();
+        charUnicodeValue = ConvertKeyToCharID(key);
         QString frameStr = itemVar.value(kPlistKey_frame).toString();
         QString offsetStr = itemVar.value(kPlistKey_offset).toString();
         if(!sourceSize.isValid())
@@ -49,6 +50,7 @@ FntData FntSerializer::ConvertPlistVarToFntData(QVariant &plistVar)
                                   offset);
         tempFntPage.m_chars.push_back(tempCharData);
     }
+    tempFntData.m_pages.push_back(tempFntPage);
     return tempFntData;
 }
 
@@ -58,7 +60,7 @@ QString FntSerializer::ConvertPlistVarToFntDataStr(QVariant &plistVar)
     return fntData.toString();
 }
 
-QRectF FntSerializer::ConvertStringToRectF(QString& str)
+QRectF FntSerializer::ConvertStringToRectF(const QString& str)
 {
     //{{198,0},{18,30}}
     QRectF temp;
@@ -81,7 +83,7 @@ QRectF FntSerializer::ConvertStringToRectF(QString& str)
     return temp;
 }
 
-QSizeF FntSerializer::ConvertStringToSizeF(QString& str)
+QSizeF FntSerializer::ConvertStringToSizeF(const QString& str)
 {
     // {18,30}
     QSizeF temp;
@@ -94,4 +96,13 @@ QSizeF FntSerializer::ConvertStringToSizeF(QString& str)
     temp.setWidth(wStr.toFloat());
     temp.setHeight(hStr.toFloat());
     return temp;
+}
+
+unsigned short FntSerializer::ConvertKeyToCharID(const QString& key)
+{
+    int charStrIndexBegin = key.indexOf('_');
+    charStrIndexBegin++;
+    int charStrIndexEnd = key.indexOf('.');
+    QString charStr = key.mid(charStrIndexBegin,charStrIndexEnd-charStrIndexBegin);
+    return *(charStr.utf16());
 }
