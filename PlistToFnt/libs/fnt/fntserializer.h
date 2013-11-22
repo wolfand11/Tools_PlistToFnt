@@ -18,7 +18,7 @@ public:
         ,m_yoffset(0.0f)
         ,m_xadvance(0.0f)
     {}
-    void InitWithData(unsigned int charID,QRectF frameRect,QSizeF offset)
+    void InitWithData(unsigned short charID,QRectF frameRect,QSizeF offset)
     {
         m_charID = charID;
         m_posX = frameRect.x();
@@ -46,7 +46,7 @@ public:
         return temp;
     }
 
-    unsigned int  m_charID;
+    unsigned short m_charID;
     float m_posX;
     float m_posY;
     float m_width;
