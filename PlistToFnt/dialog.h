@@ -18,6 +18,8 @@ public slots:
     void selectFile();
     void convertFile();
 private:
+    void ShowMessage(const QString& msg);
+
     Ui::Dialog *ui;
 
     QString m_fileFullPath;
