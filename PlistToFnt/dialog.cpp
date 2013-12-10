@@ -50,7 +50,11 @@ void Dialog::selectFile()
 void Dialog::convertFile()
 {
     QFile readFile(m_fileFullPath);
-    readFile.open(QFile::ReadOnly | QIODevice::Text);
+    if(!readFile.open(QFile::ReadOnly | QIODevice::Text))
+    {
+        ShowMessage("ERROR:\n Open plist file failed!\n Please Select Plist file.");
+        return;
+    }
     QVariant plistVar = PListParser::parsePList(&readFile);
     QString fntStr = FntSerializer::ConvertPlistVarToFntDataStr(plistVar);
     QString fntFileFullPath = m_fileFullPath.replace(kPlistFileSuffix,kFntFileSuffix);

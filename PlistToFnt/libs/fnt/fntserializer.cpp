@@ -100,9 +100,9 @@ QSizeF FntSerializer::ConvertStringToSizeF(const QString& str)
 
 unsigned short FntSerializer::ConvertKeyToCharID(const QString& key)
 {
-    int charStrIndexBegin = key.indexOf('_');
+    int charStrIndexBegin = key.lastIndexOf('_');
     charStrIndexBegin++;
-    int charStrIndexEnd = key.indexOf('.');
+    int charStrIndexEnd = key.lastIndexOf('.');
     QString charStr = key.mid(charStrIndexBegin,charStrIndexEnd-charStrIndexBegin);
     return *(charStr.utf16());
 }

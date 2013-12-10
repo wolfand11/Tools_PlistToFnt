@@ -13,14 +13,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         dialog.cpp \
+    libs/fnt/fntserializer.cpp \
     libs/qtplist/PListParser.cpp \
-    libs/qtplist/PListSerializer.cpp \
-    libs/fnt/fntserializer.cpp
+    libs/qtplist/PListSerializer.cpp
 
 HEADERS  += dialog.h \
+    libs/fnt/fntserializer.h \
     libs/qtplist/PListParser.h \
-    libs/qtplist/PListSerializer.h \
-    libs/fnt/fntserializer.h
+    libs/qtplist/PListSerializer.h
 
 FORMS    += dialog.ui
 
