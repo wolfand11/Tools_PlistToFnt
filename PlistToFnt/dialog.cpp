@@ -2,6 +2,7 @@
 #include "ui_dialog.h"
 #include <QFileDialog>
 #include <QDir>
+#include "gsetting.h"
 #include "./libs/qtplist/PListParser.h"
 #include "./libs/qtplist/PListSerializer.h"
 #include "./libs/fnt/fntserializer.h"
@@ -28,10 +29,10 @@ void Dialog::ShowMessage(const QString& msg)
 
 void Dialog::selectFile()
 {
+    QString plistFilePath = GSetting::GetInstance()->ReadPlistFilePathSetting();
     m_fileFullPath = QFileDialog::getOpenFileName(this,
                                                   "Select Plist File",
-                                                  QDir::currentPath(),
-                                                  //QDir::homePath(),
+                                                  plistFilePath,
                                                   tr("Plist (*.plist)"));
 
     if(m_fileFullPath.isEmpty())
@@ -43,6 +44,7 @@ void Dialog::selectFile()
     {
         m_message = "You Selected File: \n\n";
         m_message += m_fileFullPath;
+        GSetting::GetInstance()->WritePlistFilePathSetting(m_fileFullPath);
     }
     ShowMessage(m_message);
 }
