@@ -31,23 +31,21 @@ FntData FntSerializer::ConvertPlistVarToFntData(QVariant &plistVar)
     QRectF frame;
     QSizeF offset;
     QSizeF sourceSize;
+    float  xadvance=0.0f;
     foreach (const QString& key, framesVar.keys()) {
         QVariantMap itemVar = framesVar.value(key).toMap();
         charUnicodeValue = ConvertKeyToCharID(key);
         QString frameStr = itemVar.value(kPlistKey_frame).toString();
-        QString offsetStr = itemVar.value(kPlistKey_offset).toString();
-        if(!sourceSize.isValid())
-        {
-            QString sourceSizeStr = itemVar.value(kPlistKey_sourceSize).toString();
-            sourceSize = ConvertStringToSizeF(sourceSizeStr);
-            tempFntData.m_lineHeight = sourceSize.height();
-        }
+        QString sourceSizeStr = itemVar.value(kPlistKey_sourceSize).toString();
+        sourceSize = ConvertStringToSizeF(sourceSizeStr);
+        tempFntData.m_lineHeight = sourceSize.height();
+        xadvance = sourceSize.width();
         frame = ConvertStringToRectF(frameStr);
-        offset = ConvertStringToSizeF(offsetStr);
-
+        offset = (sourceSize-frame.size())/2.0;
         tempCharData.InitWithData(charUnicodeValue,
                                   frame,
-                                  offset);
+                                  offset,
+                                  xadvance);
         tempFntPage.m_chars.push_back(tempCharData);
     }
     tempFntData.m_pages.push_back(tempFntPage);

@@ -18,7 +18,7 @@ public:
         ,m_yoffset(0.0f)
         ,m_xadvance(0.0f)
     {}
-    void InitWithData(unsigned short charID,QRectF frameRect,QSizeF offset)
+    void InitWithData(unsigned short charID,QRectF frameRect,QSizeF offset,float xadvance)
     {
         m_charID = charID;
         m_posX = frameRect.x();
@@ -27,7 +27,7 @@ public:
         m_height = frameRect.height();
         m_xoffset = offset.width();
         m_yoffset = offset.height();
-        m_xadvance = frameRect.width();
+        m_xadvance = xadvance;
     }
     QString toString(int pageId) const
     {
